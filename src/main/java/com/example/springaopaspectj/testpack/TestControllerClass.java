@@ -18,4 +18,10 @@ public class TestControllerClass {
     public RequestModel withRequestModelFromTestPack(@RequestBody RequestModel requestModel) {
         return requestModel;
     }
+
+    //Exception Test
+    @GetMapping(value = "/testpack/exception")
+    public String exceptionTest() {
+        throw new RuntimeException("Throwed Successfully");
+    }
 }
