@@ -1,6 +1,7 @@
 package com.example.springaopaspectj;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,5 +58,13 @@ public class AopAspectClass {
 //    public void afterFromPackage(JoinPoint joinPoint) {
 //        logger.info("After execution of {}", joinPoint);
 //    }
+
+    @Around(value = "execution(* com.example.springaopaspectj.testpack.*.*(..))")
+    public void aroundAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        proceedingJoinPoint.proceed();
+        long timeTaken = System.currentTimeMillis() - startTime;
+        logger.info("Time taken by {} is {}ms", proceedingJoinPoint, timeTaken);
+    }
 
 }
